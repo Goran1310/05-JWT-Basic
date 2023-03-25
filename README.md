@@ -1,2 +1,6 @@
 # 05-JWT-Basic
-Test
+
+
+https://jwt.io/introduction
+https://jwt.io/#debugger-io
+https://www.npmjs.com/package/jsonwebtoken
