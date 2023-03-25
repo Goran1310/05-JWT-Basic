@@ -30,23 +30,12 @@ const token = jwt.sign({ id, username }, process.env.JWT_SECRET, { expiresIn: '3
 }
 
 const dashboard = async (req, res) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer')) {
-        throw new CustomAPIError('No token provided', 401)
-    }
-    const token = authHeader.split(' ')[1];
-    // console.log(token);
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // console.log(decoded);
-        // console.log(req.headers);
-        const luckyNumber = Math.floor(Math.random() * 10)
-        // res.send(`Your lucky number is ${luckyNumber}`)
-        res.status(200).json({ msg: `Hello ${decoded.username}`, secret: `Here is your authorized data. Your lucky number is ${luckyNumber}` }) 
-    } catch (error) {
-        throw new CustomAPIError('Invalid token, not authorized for this route', 401)
-    }
+console.log(req.user);
+const luckyNumber = Math.floor(Math.random() * 10)
+res.status(200).json({
+    msg: `Hello ${req.user.username}`,
+    secret: `Here is your authorized data. Your lucky number is ${luckyNumber}`
+})
 }
 
 module.exports = {
